@@ -1,0 +1,13 @@
+How the Full System Works
+
+Market Data
+      ↓
+Data Collector
+      ↓
+Strategy Engine
+      ↓
+Risk Manager
+      ↓
+Execution Engine
+      ↓
+Trade Logger
