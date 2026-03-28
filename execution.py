@@ -22,3 +22,11 @@ def execute_trade(symbol, action, qty):
             type='market',
             time_in_force='gtc'
         )
+
+
+# | Option | Meaning                           |
+# | ------ | --------------------------------- |
+# | GTC    | stays until filled or cancelled   |
+# | DAY    | expires today                     |
+# | IOC    | execute immediately or cancel     |
+# | FOK    | fully execute instantly or cancel |
