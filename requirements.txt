@@ -1,7 +1,9 @@
-streamlit
-alpaca-trade-api
-pandas
-yfinance
-ta
-plotly
-numpy
+streamlit==1.45.1
+pandas==2.2.2
+numpy==1.26.4
+yfinance==0.2.58
+plotly==6.0.1
+ta==0.11.0
+alpaca-trade-api==3.2.0
+setuptools>=68.0.0
+wheel
