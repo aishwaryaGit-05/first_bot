@@ -13,7 +13,10 @@ API_KEY = API_KEY
 SECRET_KEY = SECRET_KEY
 BASE_URL = BASE_URL
 
-api = tradeapi.REST(API_KEY, SECRET_KEY, BASE_URL, api_version="v2")
+try:
+    api = tradeapi.REST(API_KEY, SECRET_KEY, BASE_URL, api_version="v2")
+except Exception as e:
+    st.error(e)
 
 st.title("Trading Bot Dashboard")
 
