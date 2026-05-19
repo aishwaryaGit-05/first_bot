@@ -1,4 +1,4 @@
-from main import run_trades
+# from main import run_trades
 import streamlit as st
 import alpaca_trade_api as tradeapi
 from config import API_KEY, SECRET_KEY, BASE_URL
