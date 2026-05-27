@@ -1,7 +1,10 @@
-import alpaca_trade_api as tradeapi
+# import alpaca_trade_api as tradeapi
+from alpaca.trading.client import TradingClient
+
 from config import API_KEY, SECRET_KEY, BASE_URL
 
-api = tradeapi.REST(API_KEY, SECRET_KEY, BASE_URL)
+# api = tradeapi.REST(API_KEY, SECRET_KEY, BASE_URL)
+api = TradingClient(API_KEY, SECRET_KEY, paper=True)
 
 def execute_trade(symbol, action, qty):
 

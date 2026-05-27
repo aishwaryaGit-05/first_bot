@@ -1,6 +1,6 @@
 def check_position(api, symbol):
 
-    positions = api.list_positions()
+    positions = api.get_all_positions()
 
     for position in positions:
         if position.symbol == symbol:

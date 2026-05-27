@@ -1,11 +1,15 @@
-# from main import run_trades
+from main import run_trades
 import streamlit as st
-import alpaca_trade_api as tradeapi
+# import alpaca_trade_api as tradeapi
+from alpaca.trading.client import TradingClient
 from config import API_KEY, SECRET_KEY, BASE_URL
 import pandas as pd
 import time
 from strategy_bot import data_indicators, get_strategy_data
 from data_collector import get_price_data
+from alpaca.trading.requests import GetOrdersRequest
+from alpaca.trading.enums import QueryOrderStatus
+
 
 API_KEY = API_KEY
 SECRET_KEY = SECRET_KEY
@@ -17,7 +21,9 @@ if st.button("Run Bot"):
 
     # trading logic here
     try:
-        api = tradeapi.REST(API_KEY, SECRET_KEY, BASE_URL, api_version="v2")
+        # api = TradingClient.REST(API_KEY, SECRET_KEY, BASE_URL, api_version="v2")
+        api = TradingClient(API_KEY, SECRET_KEY, paper=True)
+        st.success("Connected to Alpaca")
     except Exception as e:
         st.error(e)
 
@@ -37,7 +43,12 @@ if st.button("Run Bot"):
     # st.write(rsiValue[['Close', 'RSI']].tail(10))fs
     # st.line_chart(rsiValue['RSI'])
 
-    positions = api.list_positions()
+    request_params = GetOrdersRequest(
+    status=QueryOrderStatus.OPEN,
+    limit=20
+   )      
+
+    positions = api.get_all_positions()
 
     st.subheader("Open Positions")
 
@@ -46,20 +57,18 @@ if st.button("Run Bot"):
 
     data = []
 
-    orders = api.list_orders(status='closed', limit=20)
+    orders = api.get_orders(filter=request_params)
 
     for order in orders:
         data.append({
-            "Symbol": order.symbol,
-            "Side": order.side,
-            "Qty": order.qty,
-            "Status": order.status,
-            "Entry Price": float(position.avg_entry_price),
-            "Current Price": float(position.current_price),
-            "Unrealized P&L": float(position.unrealized_pl)
-        })
+        "Symbol": order.symbol,
+        "Side": order.side,
+        "Qty": order.qty,
+        "Status": order.status
+    })
 
     df = pd.DataFrame(data)
+
     st.dataframe(df)
 
     data_for_chart = get_price_data("AAPL")

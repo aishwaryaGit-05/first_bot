@@ -2,8 +2,11 @@ from data_collector import get_price_data
 from strategy_bot import get_strategy_data, improved_strategy
 from execution import execute_trade
 from config import BASE_URL, SECRET_KEY, SYMBOLS, POSITION_SIZE, API_KEY
-import alpaca_trade_api as tradeapi
-api = tradeapi.REST(API_KEY, SECRET_KEY, BASE_URL)
+# import alpaca_trade_api as tradeapi
+from alpaca.trading.client import TradingClient
+
+# api = tradeapi.REST(API_KEY, SECRET_KEY, BASE_URL)
+api = TradingClient(API_KEY, SECRET_KEY, paper=True)
 
 def run_trades():
     print("Running trades...")
