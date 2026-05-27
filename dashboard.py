@@ -17,7 +17,12 @@ BASE_URL = BASE_URL
 
 st.title("Trading Bot")
 
-if st.button("Run Bot"):
+col1, col2, col3 = st.columns(3)
+
+run_bot = col1.button("Run Bot")
+load_price = col2.button("Load price data")
+
+if run_bot:
 
     # trading logic here
     try:
@@ -55,27 +60,23 @@ if st.button("Run Bot"):
     for position in positions:
         st.write("Symbol:", position.symbol, "Quantity:", position.qty, "Current Price:", position.current_price)
 
-    data = []
+        orders = api.get_orders(filter=request_params)
+        data = [
+            {"Symbol": order.symbol, "Side": order.side, "Qty": order.qty, "Status": order.status}
+            for order in orders
+        ]
 
-    orders = api.get_orders(filter=request_params)
+        if data:
+            st.dataframe(pd.DataFrame(data))
+        else:
+            st.info("No open orders found")
+    
+    # before button
+    # data_for_chart = get_price_data("AAPL")
+    # stock_data = data_indicators(data_for_chart)
 
-    for order in orders:
-        data.append({
-        "Symbol": order.symbol,
-        "Side": order.side,
-        "Qty": order.qty,
-        "Status": order.status
-    })
-
-    df = pd.DataFrame(data)
-
-    st.dataframe(df)
-
-    data_for_chart = get_price_data("AAPL")
-    stock_data = data_indicators(data_for_chart)
-
-    st.line_chart(stock_data[['short_ma', 'long_ma', 'ma200']])
-    st.line_chart(stock_data['rsi'])
+    # st.line_chart(stock_data[['short_ma', 'long_ma', 'ma200']])
+    # st.line_chart(stock_data['rsi'])
 
     # st.subheader("Trade History")
     # st.subheader("Open Positions with P&L")
@@ -111,6 +112,16 @@ if st.button("Run Bot"):
     time.sleep(60)
     st.rerun()
     st.write("Bot Running")
+
+ # enclosed inside a button due to deployment
+if load_price:
+    data_for_chart = get_price_data("AAPL")
+    stock_data = data_indicators(data_for_chart)
+
+    st.subheader("AAPL Strategy Data")
+    # st.write(stock_data[['Close', 'RSI']].tail(10))
+    st.line_chart(stock_data[['short_ma', 'long_ma', 'ma200']])
+    st.line_chart(stock_data['rsi'])
 
 # # from main import get_main_data
 
