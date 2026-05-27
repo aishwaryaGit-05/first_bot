@@ -1,5 +1,5 @@
 import yfinance as yf
-import pandas as pd
+# import pandas as pd
 
 def get_price_data(symbol):
     data = yf.download(symbol, period="3mo", interval="1d") # symbol means the stock symbol, e.g., "AAPL" for Apple Inc.
