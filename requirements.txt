@@ -1,8 +1,6 @@
 streamlit==1.45.1
 pandas==2.2.2
 alpaca-py
-yfinance==0.2.54
-ta==0.11.0
 requests
 urllib3<2
 watchdog

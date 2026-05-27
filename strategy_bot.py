@@ -20,18 +20,17 @@ def improved_strategy(data, position=None):
     # Indicators
     data = data_indicators(data)
     latest = data.iloc[-1]
-    current_price = latest['Close']
-
+    current_price = latest['close']
 
     print("Calculated moving averages. Latest long MA:", latest['long_ma'], "Latest short MA:", latest['short_ma'])
-    print("Latest Close Price:", latest['Close'])
+    print("Latest Close Price:", latest['close'])
     print("Latest RSI:", latest['rsi'])
 
     # ---------------------------
     # TREND CONFIRMATION
     # ---------------------------
     uptrend = (
-        latest['Close'] > latest['long_ma'] and
+        latest['close'] > latest['long_ma'] and
         latest['long_ma'] > latest['ma200']
     )
 
@@ -42,7 +41,7 @@ def improved_strategy(data, position=None):
 
         if (
             uptrend and   # trend up
-            latest['Close'] > latest['short_ma'] and
+            latest['close'] > latest['short_ma'] and
             30 < latest['rsi'] < 50                  # pullback zone (better than <40)
         ):
             return "BUY"
@@ -65,7 +64,7 @@ def improved_strategy(data, position=None):
             return "SELL"
 
         # Exit if trend weakens
-        if latest['Close'] < latest['short_ma']:
+        if latest['close'] < latest['short_ma']:
             return "SELL"
 
         return "HOLD"
@@ -81,12 +80,12 @@ def get_strategy_data(data, position):
     return data
 
 def data_indicators(data):
-    data['short_ma'] = data['Close'].rolling(20).mean()
-    data['long_ma'] = data['Close'].rolling(50).mean()
-    data['ma200'] = data['Close'].rolling(200).mean()
+    data['short_ma'] = data['close'].rolling(20).mean()
+    data['long_ma'] = data['close'].rolling(50).mean()
+    data['ma200'] = data['close'].rolling(200).mean()
 
     from ta.momentum import RSIIndicator
-    data['rsi'] = RSIIndicator(data['Close'], window=14).rsi()
+    data['rsi'] = RSIIndicator(data['close'], window=14).rsi()
 
     return data
 
