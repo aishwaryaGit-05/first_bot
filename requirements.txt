@@ -1,9 +1,10 @@
 streamlit==1.45.1
 pandas==2.2.2
-alpaca-py
+alpaca-py==0.28.1
 requests
-urllib3<2
 watchdog
+plotly
+numpy
 
 # streamlit==1.45.1
 # pandas==2.2.3
