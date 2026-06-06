@@ -4,6 +4,7 @@ import streamlit as st
 trading_client = TradingClient(API_KEY, SECRET_KEY, paper=True)
 import pandas as pd
 from alpaca.trading.requests import GetPortfolioHistoryRequest
+import plotly.express as px
 
 history = trading_client.get_portfolio_history()
 
@@ -20,8 +21,6 @@ equity_df["timestamp"] = pd.to_datetime(
 st.line_chart(
     equity_df.set_index("timestamp")["equity"]
 )
-
-import plotly.express as px
 
 fig = px.line(
     equity_df,
