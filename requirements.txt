@@ -5,6 +5,7 @@ requests
 urllib3<2
 watchdog
 ta==0.11.0
+streamlit-option-menu
 
 # streamlit==1.45.1
 # pandas==2.2.3

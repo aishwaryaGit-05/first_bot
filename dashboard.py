@@ -9,14 +9,36 @@ from strategy_bot import data_indicators, get_strategy_data
 from data_collector import get_price_data
 from alpaca.trading.requests import GetOrdersRequest
 from alpaca.trading.enums import QueryOrderStatus
+# from streamlit_option_menu import option_menu
 
 
 API_KEY = API_KEY
 SECRET_KEY = SECRET_KEY
 BASE_URL = BASE_URL
 
-st.title("Trading Bot")
 
+st.set_page_config(
+    page_title="Trading Dashboard",
+    page_icon="📈",
+    layout="wide"
+)
+
+st.title("📈 Trading Dashboard")
+
+st.write("Select a page from the sidebar.")
+
+# page = st.sidebar.radio(
+#     "Navigate",
+#     [
+#         "Portfolio",
+#         "Positions",
+#         "Orders",
+#         "Performance",
+#         "Market Watchlist"
+#     ]
+# )
+
+#  old script
 col1, col2, col3 = st.columns(3)
 
 run_bot = col1.button("Run Bot")
