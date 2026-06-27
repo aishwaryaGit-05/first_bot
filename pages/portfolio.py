@@ -2,11 +2,14 @@ import streamlit as st
 # import alpaca_trade_api as tradeapi
 from alpaca.trading.client import TradingClient
 from config import API_KEY, SECRET_KEY, BASE_URL
-
-
+from components.sidebar import show_sidebar
 trading_client = TradingClient(API_KEY, SECRET_KEY, paper=True)
 account = trading_client.get_account()
 
+if not st.session_state.get("logged_in"):
+    st.switch_page("dashboard.py")
+
+show_sidebar()
 
 col1,col2,col3,col4 = st.columns(4)
 

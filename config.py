@@ -9,3 +9,8 @@ SYMBOLS = ["AAPL"]
 POSITION_SIZE = 1
 STOP_LOSS_PERCENT = 0.02
 TAKE_PROFIT_PERCENT = 0.05
+
+
+# SUPABASE CONFIG
+SUPABASE_URL = "https://gyjfpbhevgvyilaykmuw.supabase.co"
+SUPABASE_KEY = "sb_publishable_WZop3vbUcppOrESquEEjLA_dMd3R9lg"

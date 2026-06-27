@@ -4,9 +4,15 @@ from config import API_KEY, SECRET_KEY, BASE_URL
 import streamlit as st
 trading_client = TradingClient(API_KEY, SECRET_KEY, paper=True)
 import pandas as pd
-
+from components.sidebar import show_sidebar
 from alpaca.trading.requests import GetOrdersRequest
 from alpaca.trading.enums import QueryOrderStatus
+
+if not st.session_state.get("logged_in"):
+    st.switch_page("dashboard.py")
+
+show_sidebar()
+
 
 request = GetOrdersRequest(
     status=QueryOrderStatus.ALL,
