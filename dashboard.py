@@ -16,6 +16,11 @@ from auth.signup import signup
 #     layout="wide"
 #     )
 
+st.set_page_config(
+        page_title="Trading Bot",
+        initial_sidebar_state="collapsed"
+    )
+
 st.markdown("""
 <style>
 [data-testid="stSidebarNav"] {
@@ -25,10 +30,8 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 if not st.session_state.get("logged_in"):
-    st.set_page_config(
-        page_title="Trading Bot",
-        initial_sidebar_state="collapsed"
-    )
+    st.title("Trading Bot")
+    st.write("Please login or signup to continue.")
 
 tab1, tab2 = st.tabs(["Login", "Signup"])
 
