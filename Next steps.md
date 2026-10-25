@@ -171,3 +171,41 @@ https://your-app-name.streamlit.app
 For example
 
 https://firstbotv1.streamlit.app
+
+
+UI in react
+
+Phase 1 — Preserve Streamlit
+Keep working
+Continue using your current login, watchlist, Alpaca integration, and strategy. Commit a stable version to Git before major changes.
+
+
+
+
+Phase 2 — Build React UI
+
+Create a separate frontend/ directory using React and Vite. Develop the dashboard design independently without changing Streamlit.
+
+
+
+
+Phase 3 — Connect Python APIs
+
+Create a FastAPI backend that reuses your existing Python modules. Connect React to account data, positions, orders, and strategy signals.
+
+
+
+
+Phase 4 — Test and migrate
+
+Verify authentication, portfolio data, error handling, and paper-trading behavior. Switch to React when the key workflows are working reliably.
+
+
+-------------------------
+Project architcture would be
+-------------------------
+
+For your project, the overall setup would be:
+- React + Vite: Frontend dashboard
+- FastAPI + Python: Trading strategy and Alpaca API integration
+- Supabase: User authentication and database
